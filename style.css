@@ -57,6 +57,9 @@ div#game {
     overflow: hidden;
     position: relative;
 }
+div#game:focus{
+    outline: 0;
+}
 
 #words {
     filter: blur(5px);
