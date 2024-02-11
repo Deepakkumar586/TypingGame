@@ -3,6 +3,9 @@ const words =
     " "
   );
 const wordsCount = words.length;
+const gameTime = 30 *1000;
+window.timer = null;
+window.gameStart = null;
 
 // add class in HTML element
 function addClass(el, name) {
@@ -35,6 +38,14 @@ function newGame() {
   addClass(document.querySelector(".word"), "current");
   addClass(document.querySelector(".letter"), "current");
 }
+
+// game Over Function
+function gameOver(){
+  clearInterval(window.timer);
+  addClass(document.getElementById('game'),'over');
+}
+
+
 // when user click any key
 document.getElementById("game").addEventListener("keyup", (ev) => {
   const key = ev.key;
@@ -46,7 +57,32 @@ document.getElementById("game").addEventListener("keyup", (ev) => {
   const isBackspace = key === "Backspace";
   const isFirstLetter = currentLetter === currentWord.firstChild;
 
+
+    // if game is over stop thi script
+  if(document.querySelector('#game.over')){
+    return;
+  }
   console.log({ key, expected });
+
+  // timer
+  if(!window.timer && isLetter){
+    window.timer = setInterval(()=>{
+       if(!window.gameStart){
+        window.gameStart = (new Date()).getTime();
+       }
+       const currentTime = (new Date()).getTime();
+       const msPassed = currentTime - window.gameStart;
+       const sPassed = Math.round(msPassed /1000);
+       const sLeft = (gameTime / 1000) - sPassed;
+       if(sLeft <= 0){
+        gameOver();
+       }
+       document.getElementById('info').innerHTML = sLeft + '';
+    }, 1000);
+
+    // alert("start Timer");
+  }
+
 
   // handle every letter (only left last letter) Letter of Word
   if (isLetter) {
@@ -108,6 +144,13 @@ document.getElementById("game").addEventListener("keyup", (ev) => {
       removeClass(currentWord.lastChild, "incorrect");
       removeClass(currentWord.lastChild, "correct");
     }
+  }
+
+  // when we move our cursor line of words
+  if(currentWord.getBoundingClientRect().top > 250){
+    const words = document.getElementById('words');
+    const margin = parseInt(words.style.marginTop || '0px');
+    words.style.marginTop = (margin - 35) + 'px';
   }
 
   // Now Cursor Move
