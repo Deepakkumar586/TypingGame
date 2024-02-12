@@ -4,7 +4,7 @@
     --bgColor: #333;
     --textPrimary: #fff;
     --textSecondary: #666;
-    --primaryColor: rgb(226, 158, 49);
+    --primaryColor: rgb(255, 149, 68);
 }
 
 body {
@@ -16,16 +16,16 @@ body {
 
 main {
     width: 600px;
-    margin: 50px auto;
+    margin: 180px auto;
 }
 
 h1 {
     color: var(--primaryColor);
-    fill: var(--primaryColor);
 }
 
 h1 svg {
     width: 40px;
+    fill: var(--primaryColor);
 }
 
 #header {
@@ -47,7 +47,7 @@ button {
     border: 0;
     color: rgba(255, 255, 255, .5);
     padding: 5px 20px;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -64,7 +64,7 @@ div#game:focus {
 
 #words {
     filter: blur(5px);
-    color: var(--textSecondary)
+    color: var(--textSecondary);
 }
 
 #game:focus #words {
@@ -127,13 +127,13 @@ div.word {
 
 #game.over #words {
     opacity: .5;
-    filter:blur(0px);
-
+    filter: blur(0px);
 }
 
 #game.over:focus #cursor {
     display: none;
 }
-#game.over #focus-error{
+
+#game.over #focus-error {
     display: none;
 }
