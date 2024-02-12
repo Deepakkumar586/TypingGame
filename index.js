@@ -3,7 +3,7 @@ const words =
     " "
   );
 const wordsCount = words.length;
-const gameTime = 3 * 1000;
+const gameTime = 30 * 1000;
 window.timer = null;
 window.gameStart = null;
 
